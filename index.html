@@ -3,74 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Northgate Solutions</title>
+<title>Meridian Global Logistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --navy: #0b2545;
+    --steel: #13315c;
+    --amber: #e8a33d;
+    --paper: #f3f1ec;
+    --ink: #1c1f26;
+    --line: #d8d3c8;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    color: #1a1a1a;
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
     line-height: 1.6;
   }
-  header {
-    background: #1a2f4b;
+  h1, h2, h3, .display {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* --- Nav --- */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
     color: white;
-    padding: 60px 24px;
-    text-align: center;
   }
-  header h1 { font-size: 2.2rem; margin-bottom: 12px; }
-  header p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: 0 auto; }
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 48px 24px;
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
   }
-  main h2 { margin-bottom: 12px; color: #1a2f4b; }
-  main p { margin-bottom: 20px; color: #444; }
-  .hint {
-    background: #f0f4f8;
-    border-left: 4px solid #1a2f4b;
-    padding: 16px 20px;
-    border-radius: 6px;
+  .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; }
+  .brand span { color: var(--amber); }
+  nav .links { display: flex; gap: 28px; font-size: 0.92rem; }
+  nav .links a { text-decoration: none; opacity: 0.85; }
+  nav .links a:hover { opacity: 1; }
+
+  /* --- Hero --- */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 96px 0 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.05;
+    max-width: 780px;
+  }
+  .hero h1 .accent { color: var(--amber); }
+  .hero p.lede {
     margin-top: 24px;
+    max-width: 560px;
+    font-size: 1.1rem;
+    color: #cdd6e3;
+  }
+  .hero .stats {
+    display: flex; gap: 48px; margin-top: 56px; flex-wrap: wrap;
+  }
+  .hero .stat .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--amber);
+  }
+  .hero .stat .label { font-size: 0.88rem; color: #b7c2d3; margin-top: 2px; }
+
+  .route-lines {
+    position: absolute; top: 0; right: -10%; width: 70%; height: 100%;
+    opacity: 0.35; z-index: 1;
+  }
+
+  /* --- Sections --- */
+  section { padding: 88px 0; }
+  section.tint { background: #eae6db; }
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head h2 { font-size: 2rem; color: var(--navy); }
+  .section-head p { margin-top: 12px; color: #4a4f58; max-width: 60ch; }
+
+  /* --- Services: alternating rows, not identical cards --- */
+  .service-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+  }
+  .service-row:last-child { border-bottom: 1px solid var(--line); }
+  .service-row:nth-child(even) { grid-template-columns: 1.4fr 1fr; }
+  .service-row:nth-child(even) .service-copy { order: 2; }
+  .service-index {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    opacity: 0.15;
+  }
+  .service-copy h3 { font-size: 1.35rem; color: var(--navy); margin-bottom: 8px; }
+  .service-copy p { color: #4a4f58; max-width: 46ch; }
+
+  /* --- Network / hub cities --- */
+  .hub-list {
+    display: flex; flex-wrap: wrap; gap: 0 40px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+  }
+  .hub-list span {
+    padding: 10px 0;
+    border-bottom: 2px solid transparent;
+  }
+  .hub-list span:not(:last-child)::after {
+    content: '';
+  }
+
+  /* --- Employee portal callout --- */
+  .portal {
+    background: var(--navy);
+    color: white;
+    border-radius: 4px;
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .portal h2 { color: white; font-size: 1.7rem; }
+  .portal p { color: #cdd6e3; margin-top: 12px; max-width: 48ch; }
+  .portal .cta-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--amber);
+    color: var(--navy);
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+  }
+  .portal-visual {
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 40px;
+    font-size: 0.92rem;
+    color: #b7c2d3;
+  }
+  .portal-visual code {
+    display: block; margin-top: 6px; color: var(--amber);
+    font-family: monospace; font-size: 0.85rem;
+  }
+
+  /* --- Footer --- */
+  footer {
+    background: #071a30;
+    color: #93a0b5;
+    padding: 48px 0;
+    font-size: 0.88rem;
+  }
+  footer .wrap {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+
+  @media (max-width: 720px) {
+    .service-row, .service-row:nth-child(even) {
+      grid-template-columns: 1fr;
+    }
+    .service-row:nth-child(even) .service-copy { order: 0; }
+    .portal { grid-template-columns: 1fr; padding: 36px 24px; }
+    .portal-visual { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 24px; }
+    nav .links { display: none; }
   }
 
   /* --- Chat widget --- */
   #chatbot-bubble {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #1a2f4b;
-    color: white;
-    font-size: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-    z-index: 9999;
+    position: fixed; bottom: 24px; right: 24px;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--amber); color: var(--navy);
+    font-size: 24px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.3); z-index: 9999;
     transition: transform 0.15s ease;
   }
   #chatbot-bubble:hover { transform: scale(1.06); }
-
   #chatbot-window {
-    position: fixed;
-    bottom: 96px;
-    right: 24px;
-    width: 380px;
-    height: 600px;
-    max-height: 75vh;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    display: none;
-    z-index: 9999;
-    background: white;
+    position: fixed; bottom: 96px; right: 24px;
+    width: 390px; height: 620px; max-height: 76vh;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 10px 36px rgba(0,0,0,0.35);
+    display: none; z-index: 9999; background: white;
   }
   #chatbot-window iframe { width: 100%; height: 100%; border: none; }
-
   @media (max-width: 480px) {
     #chatbot-window { width: 92vw; right: 4vw; }
   }
@@ -78,26 +211,146 @@
 </head>
 <body>
 
-<header>
-  <h1>Northgate Solutions</h1>
-  <p>Have a question about company policy? Click the chat bubble in the corner — our HR assistant can help instantly.</p>
+<nav>
+  <div class="wrap">
+    <div class="brand">MERIDIAN <span>GLOBAL LOGISTICS</span></div>
+    <div class="links">
+      <a href="#services">Services</a>
+      <a href="#network">Network</a>
+      <a href="#employees">Employee Portal</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="route-lines" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="120" r="4" fill="#e8a33d"/>
+    <circle cx="220" cy="60" r="4" fill="#e8a33d"/>
+    <circle cx="380" cy="150" r="4" fill="#e8a33d"/>
+    <circle cx="300" cy="280" r="4" fill="#e8a33d"/>
+    <circle cx="120" cy="320" r="4" fill="#e8a33d"/>
+    <path d="M60,120 Q140,40 220,60 T380,150" stroke="#e8a33d" stroke-width="1.2" fill="none" opacity="0.6"/>
+    <path d="M220,60 Q260,180 300,280 T120,320" stroke="#e8a33d" stroke-width="1.2" fill="none" opacity="0.6"/>
+    <path d="M60,120 Q90,220 120,320" stroke="#e8a33d" stroke-width="1.2" fill="none" opacity="0.4"/>
+  </svg>
+  <div class="wrap">
+    <h1>Freight moves the world.<br>We move <span class="accent">freight</span>.</h1>
+    <p class="lede">
+      Ocean, air, and inland freight forwarding, customs brokerage, and warehousing
+      across 15 hub locations — built for companies who can't afford a shipment
+      to go quiet.
+    </p>
+    <div class="stats">
+      <div class="stat"><div class="num">15</div><div class="label">Hub locations</div></div>
+      <div class="stat"><div class="num">3,000+</div><div class="label">Corporate clients</div></div>
+      <div class="stat"><div class="num">2,000</div><div class="label">Employees worldwide</div></div>
+    </div>
+  </div>
 </header>
 
-<main>
-  <h2>Employee Resources</h2>
-  <p>This page hosts our internal HR policy assistant. Ask about leave entitlements,
-  work-from-home rules, reimbursement limits, and more — answers come directly
-  from the official HR Policy Manual, with page references included.</p>
-  <div class="hint">
-    Tip: try asking "how many days of paternity leave do I get?" or
-    "what's the reimbursement limit for client meals?"
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What we move, and how</h2>
+      <p>Six operating groups, one shipment record from origin to final mile.</p>
+    </div>
+
+    <div class="service-row">
+      <div class="service-index">01</div>
+      <div class="service-copy">
+        <h3>Ocean &amp; Air Freight Forwarding</h3>
+        <p>Full-container, less-than-container, and airfreight bookings with carrier
+        relationships spanning every major trade lane — documentation and tracking
+        handled end to end.</p>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-index">02</div>
+      <div class="service-copy">
+        <h3>Customs Brokerage</h3>
+        <p>Tariff classification, compliance filings, and clearance across every
+        jurisdiction we operate in — so cargo doesn't sit at the border.</p>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-index">03</div>
+      <div class="service-copy">
+        <h3>Warehousing &amp; Fulfillment</h3>
+        <p>Storage, pick-and-pack, and distribution from facilities positioned at
+        every hub — built to flex with seasonal volume.</p>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-index">04</div>
+      <div class="service-copy">
+        <h3>Fleet &amp; Inland Transport</h3>
+        <p>Owned and leased fleet for first- and last-mile movement, coordinated
+        against live shipment schedules.</p>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-index">05</div>
+      <div class="service-copy">
+        <h3>Supply Chain Planning</h3>
+        <p>Demand forecasting and route optimization that treats your inventory
+        position as seriously as your freight cost.</p>
+      </div>
+    </div>
   </div>
-</main>
+</section>
 
-<div id="chatbot-bubble" onclick="toggleChatbot()">💬</div>
+<section class="tint" id="network">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Where we operate</h2>
+      <p>Fifteen hubs, one operating standard.</p>
+    </div>
+    <div class="hub-list">
+      <span>Mumbai</span><span>Singapore</span><span>Dubai</span><span>Rotterdam</span>
+      <span>New York</span><span>Shanghai</span><span>Nairobi</span><span>Hamburg</span>
+      <span>Los Angeles</span><span>Colombo</span><span>Jebel Ali</span><span>Antwerp</span>
+      <span>Hong Kong</span><span>Santos</span><span>Felixstowe</span>
+    </div>
+  </div>
+</section>
 
+<section id="employees">
+  <div class="wrap">
+    <div class="portal">
+      <div>
+        <h2>For Meridian employees</h2>
+        <p>
+          Check your leave balance, apply for Casual or Sick leave, or ask about
+          company policy — the employee assistant answers instantly using your
+          Employee ID.
+        </p>
+        <button class="cta-btn" onclick="toggleChatbot()">Open Employee Assistant</button>
+      </div>
+      <div class="portal-visual">
+        Try asking:
+        <code>"MGL10002 apply for 2 days casual leave"</code>
+        <code>"MGL10001 what's my leave balance"</code>
+        <code>"how many days of paternity leave do we get"</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>Meridian Global Logistics &mdash; a fictional company built for a portfolio project.</div>
+    <div>people@meridianlogistics.com</div>
+  </div>
+</footer>
+
+<div id="chatbot-bubble" onclick="toggleChatbot()">📦</div>
 <div id="chatbot-window">
-  <iframe src="https://hrai--assistant.streamlit.app/?embed=true"></iframe>
+  <iframe src="https://YOUR-APP-NAME.streamlit.app/?embed=true"></iframe>
 </div>
 
 <script>
